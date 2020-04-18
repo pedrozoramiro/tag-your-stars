@@ -1,0 +1,21 @@
+URL_GITHUB_LOGIN: "https://github.com"
+URL_GITHUB: "https://api.github.com"
+CLIENT_ID: dce7e3025651dbf7d995
+CLIENT_SECRET: 97d201be7a1b0c9022f39c157b15087dc4dfc9e9
+
+server:
+  port: 8080
+  servlet:
+    context-path: /tag-you-star-api/v1
+
+spring:
+  profiles:
+    active: dev
+
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure:
+            logging: INFO

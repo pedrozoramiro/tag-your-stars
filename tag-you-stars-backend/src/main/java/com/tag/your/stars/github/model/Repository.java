@@ -3,8 +3,9 @@ package com.tag.your.stars.github.model;
 import lombok.Data;
 
 @Data
-public class Contributor {
-    String login;
+public class Repository {
+    String id;
     String name;
-    String starred_url;
+    String description;
+    String html_url;
 }
