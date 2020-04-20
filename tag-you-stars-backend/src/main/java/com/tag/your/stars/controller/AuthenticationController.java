@@ -1,40 +1,21 @@
 package com.tag.your.stars.controller;
 
-import com.tag.your.stars.controller.dto.LoginDTO;
-import com.tag.your.stars.github.GitHubClient;
-import com.tag.your.stars.github.GitHubOauthClient;
-import com.tag.your.stars.github.model.Contributor;
-import com.tag.your.stars.github.model.Token;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.tag.your.stars.controller.dto.UserDTO;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin("http://localhost:3000/")
 public class AuthenticationController {
 
-    @Autowired
-    private GitHubOauthClient gitHubOauthClient;
-
-    @Autowired
-    private GitHubClient gitHubClient;
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Contributor create(@RequestBody final LoginDTO login) {
-        //TODO: criar o meu próprio token a partir do code e anexar informacoes como nomes do usuario
-        final String tokenText = this.gitHubOauthClient.login(login.getCode());
-        final Token token = Token.parse(tokenText);
-        final Contributor contributor = this.gitHubClient.getUserLoggedDetail(token.getBearerToken());
-        return contributor;
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public LoginDTO get() {
-
-        return new LoginDTO();
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public UserDTO user(final HttpServletRequest request, final Principal p) {
+        return new UserDTO(p.getName());
     }
 
 }

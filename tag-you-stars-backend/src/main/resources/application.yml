@@ -12,6 +12,20 @@ spring:
   profiles:
     active: dev
 
+security:
+  oauth2:
+    resource:
+      user-info-uri: https://api.github.com/user
+    client:
+      client-id: 06d84754c830891922dc
+      client-secret: 99cafe8a565c6e4d4f26c893b4ed9979cbf7df55
+      access-token-uri: https://github.com/login/oauth/access_token
+      user-authorization-uri: https://github.com/login/oauth/authorize
+      redirect-uri: http://localhost
+      token-name: oauth_token
+      authentication-scheme: query
+      client-authentication-scheme: form
+
 logging:
   level:
     org:

@@ -1,8 +1,18 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://127.0.0.1:8080/api/v1/';
+const BASE_URL = 'http://localhost/api/v1/';
 
-const executeRequest = (method, url,config) => (axios[method](`${BASE_URL}${url}`, config));
+var config = {
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Expose-Headers': 'Access-Control-*',
+        'Access-Control-Allow-Headers': 'Access-Control-*, Origin, X-Requested-With, Content-Type, Accept',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
+        'Allow':  'GET, POST, PUT, DELETE, OPTIONS, HEAD'
+    }
+};
+
+const executeRequest = (method, url, data) => (axios[method](`${BASE_URL}${url}`,data, config));
 
 export default {
     get: url => executeRequest('get', url),
