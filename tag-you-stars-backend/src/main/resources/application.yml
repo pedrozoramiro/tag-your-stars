@@ -21,7 +21,7 @@ security:
       client-secret: 99cafe8a565c6e4d4f26c893b4ed9979cbf7df55
       access-token-uri: https://github.com/login/oauth/access_token
       user-authorization-uri: https://github.com/login/oauth/authorize
-      redirect-uri: http://localhost
+      #      redirect-uri: http://localhost/redirect
       token-name: oauth_token
       authentication-scheme: query
       client-authentication-scheme: form

@@ -19,10 +19,11 @@ class RepositoryList extends Component {
     }
 
     render() {
-        var {user}  = this.props;
+        var {currentUser}  = this.props;
+
         return(
             <div>
-            <p>HELLO {user.userName}</p>
+            <p>HELLO {currentUser.userName}</p>
           </div>);
     }
 }

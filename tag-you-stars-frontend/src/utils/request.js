@@ -12,12 +12,9 @@ var config = {
     }
 };
 
-const executeRequest = (method, url, data) => (axios[method](`${BASE_URL}${url}`,data, config));
-
 export default {
-    get: url => executeRequest('get', url),
-    query: url => executeRequest('get', url),
-    save: (url, data) => executeRequest('post', url, data),
-    update: (url, data) => executeRequest('put', url, data),
-    remove: url => executeRequest('delete', url)
+    get: url => axios.get(`${BASE_URL}${url}`,config),
+    save: (url, data) => axios.post(`${BASE_URL}${url}`,data,config),
+    update: (url, data) => axios.put(`${BASE_URL}${url}`,data,config),
+    remove: url => axios.delete(`${BASE_URL}${url}`,config)
 };
