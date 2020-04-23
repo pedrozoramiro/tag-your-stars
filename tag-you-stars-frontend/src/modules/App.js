@@ -5,9 +5,12 @@ import { Route } from "react-router-dom";
 import '../styles/App.css';
 import RepositoryList from './RepositoryList'
 import Login from './Login';
-import { actions as userActions, selectors as userSelectors } from './data/userReducer';
 import PrivateRoute from '../common/PrivateRoute';
 import OAuth2RedirectHandler from './oauth2/OAuth2RedirectHandler';
+import '../css/App.css';
+
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 class App extends Component {
 
@@ -16,36 +19,29 @@ state = {
   currentUser: null,
   loading: false
 }
-
-
-componentDidMount() {
-  this.props.getUserLogged();
-}
-
   render() {
-    const { currentUser } = this.props;
-    console.log(currentUser)
     return (
-    <div className="app">
-      <Route exact path="/login" component={Login}/>
-      <PrivateRoute path="/list" 
-            authenticated={true} 
-            currentUser={currentUser}
+      <div className="App">
+        <div className="App-header">
+          <h4>TAG YOUR STAR</h4>
+          <h3>Permite adicionar uma tag a um repositório do github para que ele possa ser encontrado facilmente.</h3>
+        </div>
+        <Route exact path="/login" component={Login}/>
+        <PrivateRoute path="/list" 
+              authenticated={true} 
               component={RepositoryList}>
-       </PrivateRoute>
-       <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>  
-    </div>
+        </PrivateRoute>
+        <Route path="/redirect" component={OAuth2RedirectHandler}></Route>  
+      </div>
      );
   }
 }
 
 
 const mapStateToProps = (state) => ({
-  currentUser: userSelectors.getUser(state)
 });
 
 const mapDispatchToProps = {
-  ...userActions,
 };
 
 export default compose(

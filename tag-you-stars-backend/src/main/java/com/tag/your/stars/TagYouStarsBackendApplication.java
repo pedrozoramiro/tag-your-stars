@@ -7,9 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 public class TagYouStarsBackendApplication {
-
     public static void main(final String[] args) {
         SpringApplication.run(TagYouStarsBackendApplication.class, args);
     }
-
 }

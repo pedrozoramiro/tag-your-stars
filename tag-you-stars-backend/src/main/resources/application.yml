@@ -3,12 +3,22 @@ URL_GITHUB: "https://api.github.com"
 CLIENT_ID: dce7e3025651dbf7d995
 CLIENT_SECRET: 97d201be7a1b0c9022f39c157b15087dc4dfc9e9
 
+
 server:
   port: 8080
   servlet:
     context-path: /api/v1
 
 spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      host: localhost
+      port: 27017
+      database: tag-your-star
+      username: admin
+      password: admin
+
   profiles:
     active: dev
 
@@ -21,8 +31,8 @@ security:
       client-secret: 99cafe8a565c6e4d4f26c893b4ed9979cbf7df55
       access-token-uri: https://github.com/login/oauth/access_token
       user-authorization-uri: https://github.com/login/oauth/authorize
-      #      redirect-uri: http://localhost/redirect
-      token-name: oauth_token
+      redirect-uri: http://localhost/redirect
+      #      token-name: oauth_token
       authentication-scheme: query
       client-authentication-scheme: form
 

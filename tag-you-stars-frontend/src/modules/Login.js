@@ -23,23 +23,16 @@ class Login extends Component {
 
     render() {
 
-      var teste = `https://github.com/login/oauth/authorize?client_id=06d84754c830891922dc&scope=user:email`;
-      teste = 'http://localhost/api/v1/login/oauth2/code/github?redirect_uri=http://localhost/oauth2/redirect'
+      var teste = `https://github.com/login/oauth/authorize?client_id=06d84754c830891922dc&scope=user:email&redirect_uri=http://localhost/list`;
+      //teste = 'http://localhost/api/v1/login/oauth2/code/github?redirect_uri=http://localhost/oauth2/redirect'
 
         return(  
         <div className="App">
-
             <div className="social-login">
                 <a className="btn btn-block social-btn github" href={teste}>
                     <img src={githubLogo} alt="Github" /> Log in with Github</a>
             </div>
-
-
         <header className="App-header">
-
-   
-
-
             <GitHubLogin clientId="06d84754c830891922dc"
             onSuccess={this.onSuccess}
             onFailure={this.onFailure}/>

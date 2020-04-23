@@ -9,12 +9,18 @@ class OAuth2RedirectHandler extends Component {
 
 
     componentDidMount() {
-        this.props.getUserLogged();
+        setTimeout(() => {
+            console.log("VAIIIIIIIIIIIIIIIII")
+            this.props.getUserLogged();
+            console.log("BEZERRO")
+        }, 10000);
+
     }
 
 
     render() {        
         var {currentUser} = this.props;
+        console.log(currentUser);
         if(currentUser) {
             return <Redirect to={{
                 pathname: "/list",
