@@ -10,5 +10,7 @@ public class ProjectDTO {
     private String name;
     private String description;
     private String url;
+    private String ownerLogin;
+    private String ownerAvatarUrl;
     private List<String> tags;
 }

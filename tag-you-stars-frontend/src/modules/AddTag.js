@@ -4,14 +4,16 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import '../css/Card.css';
 import { Paper, Typography, Chip, Avatar, Text, Fab, TextField, Button } from '@material-ui/core';
-import { Add } from '@material-ui/icons';
-import { red } from '@material-ui/core/colors';
 import CardProject from '../common/CardProject';
 import AppContainer from '../common/AppContainer';
+import { actions as projectActions, selectors as projectSelectors } from './data/projectsReducer';
 
 class AddTag extends Component {
 
+
   render() {
+    var {project} = this.props;
+    console.log(project);
     return (
       <AppContainer>
         <Grid fluid>
@@ -26,9 +28,11 @@ class AddTag extends Component {
                 </Row>
               </Paper>
             </Col>
-            <Col xs={9}>
-              <CardProject />
-            </Col>
+            {!project ?? 
+              <Col xs={9}>
+                <CardProject project={project}/>
+              </Col>
+            }
           </Row>
         </Grid>
       </AppContainer>
@@ -36,13 +40,17 @@ class AddTag extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state,ownProps) => {
+  console.log(state);
+  console.log(ownProps);
+  return  ({
+  project: projectSelectors.getProjectById(state,ownProps.match.params.project_id),
+})};
 
 const mapDispatchToProps = {
+...projectActions,
 };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+connect(mapStateToProps, mapDispatchToProps),
 )(AddTag);
-

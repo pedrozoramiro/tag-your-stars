@@ -15,15 +15,12 @@ import { Typography } from '@material-ui/core';
 import AddTag from './AddTag';
 
 class App extends Component {
-
-
   render() {
    var token = localStorage.getItem("ACCESS_TOKEN");
-
     return (
       <div className="App">
         <Route exact path="/login" component={Login}/>
-        <Route exact path="/addtag" component={AddTag}/>
+        <Route exact path="/project/:project_id/addtag" component={AddTag}/>
         <PrivateRoute path="/list" 
               authenticated={!!token} 
               component={RepositoryList}>
@@ -33,14 +30,6 @@ class App extends Component {
      );
   }
 }
-
-
-const mapStateToProps = (state) => ({
-});
-
-const mapDispatchToProps = {
-};
-
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
 )(App);

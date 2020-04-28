@@ -8,4 +8,7 @@ public class Repository {
     String name;
     String description;
     String html_url;
+    Owner owner;
 }
+
+

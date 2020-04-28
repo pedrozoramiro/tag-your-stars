@@ -18,6 +18,8 @@ public class RepositoryToProjectMapper extends PropertyMapConfigurerSupport<Repo
                 this.map().setId(null);
                 this.map().setGithubId(this.source.getId());
                 this.map().setUrl(this.source.getHtml_url());
+                this.map().setOwnerLogin(this.source.getOwner().getLogin());
+                this.map().setOwnerAvatarUrl(this.source.getOwner().getAvatar_url());
             }
         };
     }

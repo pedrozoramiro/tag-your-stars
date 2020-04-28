@@ -23,6 +23,8 @@ public class StarProject {
     private String name;
     private String description;
     private String url;
+    private String ownerLogin;
+    private String ownerAvatarUrl;
     private List<String> tags;
 
     public StarProject(final String userNameStarred, final String githubId, final String name, final String description, final String url) {

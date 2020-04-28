@@ -20,39 +20,36 @@ class RepositoryList extends Component {
   }
 
   render() {
-    var { currentUser } = this.props;
- 
-    console.log(this.props.projects);
+    var { currentUser, projects } = this.props;
     return (
       <AppContainer>
-          <Paper elevation={5} style={{padding: "30px", margin: "10px", height: "100%" }} >
-                <Row>
-                  <TextField variant="outlined" style={{ width: "100%" }} />
-                </Row>
-                <Row>
-                  <Button variant="outlined" color="primary" style={{ width: "100%" }}> Buscar </Button>
-                </Row>
-              </Paper>
+        <Paper elevation={5} style={{ padding: "30px", margin: "10px", height: "100%" }} >
+          <Row>
+            <TextField variant="outlined" style={{ width: "100%" }} />
+          </Row>
+          <Row>
+            <Button variant="outlined" color="primary" style={{ width: "100%" }}> Buscar </Button>
+          </Row>
+        </Paper>
         <Grid fluid>
-          <CardProject />
-          <CardProject />
-          <CardProject />
-          <CardProject />
-          <CardProject />
-          <CardProject />
+          {projects.map(project => {
+            return (
+              <CardProject
+                key={project.id}
+                project={project}
+              />
+            );
+          })}
         </Grid>
       </AppContainer>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return ({
+const mapStateToProps = (state) =>  ({
     projects: projectSelectors.getProjects(state),
     currentUser: userSelectors.getUser(state),
-  })
-};
+  });
 
 const mapDispatchToProps = {
   ...projectActions,
