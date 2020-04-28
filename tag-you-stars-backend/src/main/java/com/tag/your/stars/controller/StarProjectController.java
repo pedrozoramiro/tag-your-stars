@@ -3,21 +3,20 @@ package com.tag.your.stars.controller;
 import com.tag.your.stars.controller.dto.ProjectDTO;
 import com.tag.your.stars.project.StarProject;
 import com.tag.your.stars.project.StarProjectService;
+import com.tag.your.stars.security.user.UserPrincipal;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
 public class StarProjectController {
 
     @Autowired
@@ -27,8 +26,8 @@ public class StarProjectController {
     private ModelMapper modelMapper;
 
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
-    public List<ProjectDTO> findAllProjects(final Principal p) {
-        final List<StarProject> projects = this.starProjectService.findAllStarProjectsBy(p.getName());
+    public List<ProjectDTO> findAllProjects(@AuthenticationPrincipal final UserPrincipal userPrincipal) {
+        final List<StarProject> projects = this.starProjectService.findAllStarProjectsBy(userPrincipal.getGitHubLogin());
         return projects.stream().map(project -> this.modelMapper.map(project, ProjectDTO.class)).collect(Collectors.toList());
     }
 

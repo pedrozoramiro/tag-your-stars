@@ -11,24 +11,21 @@ import '../css/App.css';
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { Typography } from '@material-ui/core';
+import AddTag from './AddTag';
 
 class App extends Component {
 
 
-state = {
-  currentUser: null,
-  loading: false
-}
   render() {
+   var token = localStorage.getItem("ACCESS_TOKEN");
+
     return (
       <div className="App">
-        <div className="App-header">
-          <h4>TAG YOUR STAR</h4>
-          <h3>Permite adicionar uma tag a um repositório do github para que ele possa ser encontrado facilmente.</h3>
-        </div>
         <Route exact path="/login" component={Login}/>
+        <Route exact path="/addtag" component={AddTag}/>
         <PrivateRoute path="/list" 
-              authenticated={true} 
+              authenticated={!!token} 
               component={RepositoryList}>
         </PrivateRoute>
         <Route path="/redirect" component={OAuth2RedirectHandler}></Route>  

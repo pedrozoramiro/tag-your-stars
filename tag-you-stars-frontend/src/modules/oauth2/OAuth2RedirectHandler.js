@@ -1,46 +1,36 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-
-import { actions as userActions, selectors as userSelectors } from '../data/userReducer';
 
 class OAuth2RedirectHandler extends Component {
+    getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
 
-
-    componentDidMount() {
-        setTimeout(() => {
-            console.log("VAIIIIIIIIIIIIIIIII")
-            this.props.getUserLogged();
-            console.log("BEZERRO")
-        }, 10000);
-
-    }
-
+        var results = regex.exec(this.props.location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
 
     render() {        
-        var {currentUser} = this.props;
-        console.log(currentUser);
-        if(currentUser) {
+        console.log(this.props.location.search);
+        const token = this.getUrlParameter('token');
+        const error = this.getUrlParameter('error');
+
+        if(token) {
+            localStorage.setItem("ACCESS_TOKEN", token);
             return <Redirect to={{
                 pathname: "/list",
                 state: { from: this.props.location }
             }}/>; 
-        } 
-        else {
-            return (<div>loading user ... </div> ); 
+        } else {
+            return <Redirect to={{
+                pathname: "/login",
+                state: { 
+                    from: this.props.location,
+                    error: error 
+                }
+            }}/>; 
         }
     }
 }
 
-const mapStateToProps = (state) => ({
-    currentUser: userSelectors.getUser(state)
-  });
-  
-  const mapDispatchToProps = {
-    ...userActions,
-  };
-  
-  export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
-  )(OAuth2RedirectHandler);
+export default OAuth2RedirectHandler;
