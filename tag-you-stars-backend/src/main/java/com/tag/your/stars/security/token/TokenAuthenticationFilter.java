@@ -1,6 +1,6 @@
 package com.tag.your.stars.security.token;
 
-import com.tag.your.stars.security.user.CustomUserDetailsService;
+import com.tag.your.stars.user.CustomUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

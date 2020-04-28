@@ -1,6 +1,6 @@
-package com.tag.your.stars.security.user;
+package com.tag.your.stars.security.principal;
 
-import com.tag.your.stars.user.User;
+import com.tag.your.stars.user.model.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

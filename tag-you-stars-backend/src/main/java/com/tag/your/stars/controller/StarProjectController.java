@@ -3,7 +3,7 @@ package com.tag.your.stars.controller;
 import com.tag.your.stars.controller.dto.ProjectDTO;
 import com.tag.your.stars.project.StarProject;
 import com.tag.your.stars.project.StarProjectService;
-import com.tag.your.stars.security.user.UserPrincipal;
+import com.tag.your.stars.security.principal.UserPrincipal;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

@@ -1,4 +1,4 @@
-package com.tag.your.stars.user;
+package com.tag.your.stars.user.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

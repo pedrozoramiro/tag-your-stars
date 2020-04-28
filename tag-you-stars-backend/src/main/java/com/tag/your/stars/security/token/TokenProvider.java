@@ -1,7 +1,7 @@
 package com.tag.your.stars.security.token;
 
 import com.tag.your.stars.security.oauth.OauthProperties;
-import com.tag.your.stars.security.user.UserPrincipal;
+import com.tag.your.stars.security.principal.UserPrincipal;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

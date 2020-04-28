@@ -1,9 +1,10 @@
 package com.tag.your.stars.security.oauth;
 
-import com.tag.your.stars.security.user.UserPrincipal;
-import com.tag.your.stars.user.User;
-import com.tag.your.stars.user.UserRepository;
+import com.tag.your.stars.security.event.LoginOrRegisterEvent;
+import com.tag.your.stars.security.principal.UserPrincipal;
+import com.tag.your.stars.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class OAuthUserService extends DefaultOAuth2UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private ApplicationEventPublisher publisher;
 
     @Override
     public OAuth2User loadUser(final OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
@@ -33,12 +34,12 @@ public class OAuthUserService extends DefaultOAuth2UserService {
 
     private OAuth2User processOAuth2User(final OAuth2User oAuth2User) {
         final GitHubUser gitHubUser = GitHubUser.create(oAuth2User.getAttributes());
-        final User user = this.userRepository.findByEmail(gitHubUser.getEmail()).orElse(new User());
+        final User user = new User();
         user.setName(gitHubUser.getName());
         user.setEmail(gitHubUser.getEmail());
         user.setImageUrl(gitHubUser.getImageUrl());
         user.setLogin(gitHubUser.getLogin());
-        final User userSaved = this.userRepository.save(user);
-        return UserPrincipal.create(userSaved, oAuth2User.getAttributes());
+        this.publisher.publishEvent(new LoginOrRegisterEvent(this, user));
+        return UserPrincipal.create(user, oAuth2User.getAttributes());
     }
 }
