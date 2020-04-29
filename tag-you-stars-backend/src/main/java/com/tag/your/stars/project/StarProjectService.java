@@ -52,7 +52,10 @@ public class StarProjectService {
         }
     }
 
-    public List<StarProject> findAllStarProjectsBy(final String userName) {
-        return this.starProjectRepository.findAllByUserNameStarred(userName);
+    public List<StarProject> findAllStarProjectsBy(final String userName, final String tagFilter) {
+        if (tagFilter == null || tagFilter.isEmpty()) {
+            return this.starProjectRepository.findAllByUserNameStarred(userName);
+        }
+        return this.starProjectRepository.findAllByUserNameStarredAndTagsRegex(userName, tagFilter);
     }
 }

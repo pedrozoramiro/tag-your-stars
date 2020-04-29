@@ -1,7 +1,6 @@
 import React from 'react';
-import { Row, Col } from 'react-flexbox-grid';
 import '../css/Card.css';
-import { Paper, Typography, Chip, Avatar } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
   
   
 const AppContainer = (props) => (

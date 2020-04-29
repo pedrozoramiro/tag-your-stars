@@ -3,8 +3,9 @@ import { Row, Col } from 'react-flexbox-grid';
 import '../css/Card.css';
 import { Paper, Typography, Chip, Avatar, Fab } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
+import If from '../utils/If';
 
-const CardProject = ({ project }) => (
+const CardProject = ({ project, history, deleteTag }) => (
   <Paper elevation={5} style={{ padding: "30px", margin: "10px", height: "100%" }}>
     <Row>
       <Col xs={2} >
@@ -30,18 +31,18 @@ const CardProject = ({ project }) => (
         <Typography component="p" style={{ margin: "20px" }}>
           {project.description}
         </Typography>
-        {!project ?? project.tags.map(tag => {
-          return (
-            <Chip variant="outlined" label={tag} onDelete={() => console.log("delete")} color="primary" />
-          );
-        })}
+        {project.tags && project.tags.map(tag => 
+            (<Chip key={tag} variant="outlined" label={tag} onDelete={() => deleteTag(project,tag)} color="primary" />))}
       </Col>
-      <Col xs={1} >
-        <Fab variant="extended" href={`/project/${project.id}/addtag`} color="primary" aria-label="add" >
-          <Add />
-          TAG
-        </Fab>
-      </Col>
+      <If test={history} >
+        <Col xs={1} >
+          <Fab variant="extended" onClick={() => history.push(`/project/${project.id}/addtag`)} color="primary" aria-label="add" >
+            <Add />
+            TAG
+          </Fab>
+        </Col>
+      </If>
+
     </Row>
   </Paper>
 );

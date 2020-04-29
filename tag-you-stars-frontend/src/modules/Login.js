@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import githubLogo from '../styles/github-logo.png'
 import '../styles/App.css';
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Grid, Row } from 'react-flexbox-grid';
 import { Paper, Link, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import AppContainer from '../common/AppContainer';
