@@ -48,7 +48,7 @@ class RepositoryList extends Component {
     var {filter } = this.state;
     return (
       <AppContainer>
-        <Paper elevation={5} style={{ padding: "30px", margin: "10px", height: "100%" }} >
+        <Paper elevation={24} style={{ paddingRight: "10%",paddingLeft: "10%",paddingTop: "30px",paddingBottom: "30px", margin: "10px", height: "100%" }} >
           <Row>
             <TextField value={filter} 
             onKeyDown={this.handleKeyDown}
