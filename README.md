@@ -20,7 +20,8 @@ Deve-se criar uma aplicação web onde podemos:
 * Gerenciar tags de repositórios listados (por exemplo, adicionar, editar, excluir);
 * Filtrar repositórios por tags.
 
-Extra: Sugerir tags para os repositórios.
+Extra: Sugerir tags para os repo sitórios.
+
 
 ## HISTÓRIAS DE USUÁRIO
 
